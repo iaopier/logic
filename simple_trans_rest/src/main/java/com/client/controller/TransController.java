@@ -20,29 +20,16 @@ public class TransController {
 
 	@RequestMapping(value = "/service/transportadora", method = RequestMethod.GET)
 	public ResponseEntity<?> getTransportadora(@RequestParam(required = false) Integer tipoTransporte) {
-		List<Responsetrans> rList = new ArrayList<Responsetrans>();
-		if (tipoTransporte != null) {
-			for (Transportadora t : data()) {
-				if (t.getTipoTransporte() == tipoTransporte) {
-					Responsetrans r = new Responsetrans();
-					r.setTempoAereo(t.getTempoAereo());
-					r.setTempoTerrestre(t.getTempoTerrestre());
-					r.setValorAereo(t.getValorAereo());
-					r.setValorTerrestre(t.getValorTerrestre());
-					rList.add(r);
-				}
-			}
-			return new ResponseEntity<>(rList, HttpStatus.OK);
+		List<Transportadora> tList = new ArrayList<Transportadora>();
+		if (tipoTransporte == null) {
+			return new ResponseEntity<>(data(), HttpStatus.OK);
 		} else {
 			for (Transportadora t : data()) {
-				Responsetrans r = new Responsetrans();
-				r.setTempoAereo(t.getTempoAereo());
-				r.setTempoTerrestre(t.getTempoTerrestre());
-				r.setValorAereo(t.getValorAereo());
-				r.setValorTerrestre(t.getValorTerrestre());
-				rList.add(r);
+				if(t.getTipoTransporte() == tipoTransporte) {
+					tList.add(t);
+				}
 			}
-			return new ResponseEntity<>(rList, HttpStatus.OK);
+			return new ResponseEntity<>(tList, HttpStatus.OK);
 		}
 
 	}

@@ -10,11 +10,12 @@ import java.util.List;
 import java.util.Properties;
 
 import com.cardboardbox.app.model.Responsetrans;
+import com.cardboardbox.app.model.Transportadora;
 
 public class TransactionDB {
-	public static List<Responsetrans> get() {
+	public static List<Transportadora> get() {
 		Connection conn = null;
-		List<Responsetrans> rList = new ArrayList<Responsetrans>();
+		List<Transportadora> tList = new ArrayList<Transportadora>();
 		try {
 			String dbURL3 = "jdbc:postgresql://localhost:5432/cardboardbox";
 			Properties parameters = new Properties();
@@ -34,8 +35,8 @@ public class TransactionDB {
 			ResultSet rs = stmt.executeQuery(
 					"SELECT \"idTipoTransporte\", valor, tempo\r\n" + "	FROM public.\"dadosTransportadoraView\";");
 			
-			Responsetrans r = new Responsetrans();
-			
+			Transportadora t = new Transportadora();
+			t.setId(1);
 			while (rs.next()) {
 
 				int idTipoTransporte = rs.getInt("idTipoTransporte");
@@ -44,9 +45,9 @@ public class TransactionDB {
 
 				int tempo = rs.getInt("tempo");
 
-				r.setTempoTerrestre(tempo);
-				r.setValorTerrestre(valor);
-				rList.add(r);
+				t.setTempoTerrestre(tempo);
+				t.setValorTerrestre(valor);
+				tList.add(t);
 			}
 
 			rs.close();
@@ -65,6 +66,6 @@ public class TransactionDB {
 			}
 		
 		}
-		return rList;
+		return tList;
 	}
 }

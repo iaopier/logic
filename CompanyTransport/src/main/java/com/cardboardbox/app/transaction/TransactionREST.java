@@ -10,10 +10,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.cardboardbox.app.model.Responsetrans;
+import com.cardboardbox.app.model.Transportadora;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TransactionREST {
-	public static Responsetrans[] getDataFromRest() {
+	public static Transportadora[] getDataFromRest() {
 		try {
 
 			DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -35,7 +36,7 @@ public class TransactionREST {
 			}
 			httpClient.getConnectionManager().shutdown();
 			ObjectMapper mapper = new ObjectMapper();
-			Responsetrans[]  obj = mapper.readValue(sb.toString(), Responsetrans[].class);
+			Transportadora[]  obj = mapper.readValue(sb.toString(), Transportadora[].class);
 			return obj;
 		} catch (ClientProtocolException e) {
 
